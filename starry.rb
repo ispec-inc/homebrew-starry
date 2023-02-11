@@ -13,8 +13,9 @@ class Starry < Formula
     end
 
     def install
-      system "mv", "starry*", "starry"
-      bin.install "starry"
+      file = Dir.glob("#{prefix}/bin/starry*").first
+      FileUtils.ln file, "#{prefix}/bin/starry"
+      bin.install_symlink bin/"starry"
     end
   end
 
@@ -22,8 +23,9 @@ class Starry < Formula
     url 'https://github.com/ispec-inc/starry/releases/download/0.1.0/x86_64-unknown-linux-gnu'
 
     def install
-      system "mv", "starry*", "starry"
-      bin.install "starry"
+      file = Dir.glob("#{prefix}/bin/starry*").first
+      FileUtils.ln file, "#{prefix}/bin/starry"
+      bin.install_symlink bin/"starry"
     end
   end
 end
