@@ -3,6 +3,7 @@ class Starry < Formula
   homepage 'https://github.com/ispec-inc/starry'
   url 'https://github.com/ispec-inc/starry.git'
   head 'https://github.com/ispec-inc/starry.git'
+  versoin "0.1.0"
 
   def install
     karnel = `uname -s`.strip.downcase
