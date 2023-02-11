@@ -16,13 +16,8 @@ class Starry < Formula
     case karnel
     when "linux"
       target = "x86_64-unknown-linux-gnu"
-    when "Darwin"
-      case arch
-      when "x86_64"
-        target = "x86_64-apple-darwin"
-      else
-        target = "aarch64-apple-darwin"
-      end
+    when "darwin"
+      target = "#{arch}-apple-darwin"
     end
 
     system 'curl',
