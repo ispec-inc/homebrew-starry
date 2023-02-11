@@ -5,27 +5,31 @@ class Starry < Formula
 
   on_macos do
     if Hardware::CPU.intel?
-      url 'https://github.com/ispec-inc/starry/releases/download/0.1.0/starry-x86_64-apple-darwin'
+      t = "x86_64-apple-darwin"
+      url "https://github.com/ispec-inc/starry/releases/download/0.1.0/starry-#{t}"
+
+      def install
+        bin.install "starry-#{t}" => "starry"
+      end
     end
 
     if Hardware::CPU.arm?
-      url 'https://github.com/ispec-inc/starry/releases/download/0.1.0/starry-aarch64-apple-darwin'
+      t = "aarch64-apple-darwin"
+      url "https://github.com/ispec-inc/starry/releases/download/0.1.0/starry-#{t}"
+
+      def install
+        bin.install "starry-#{t}" => "starry"
+      end
     end
 
-    def install
-      file = Dir.glob("#{prefix}/bin/starry*").first
-      FileUtils.ln file, "#{prefix}/bin/starry"
-      bin.install_symlink bin/"starry"
-    end
   end
 
   on_linux do
-    url 'https://github.com/ispec-inc/starry/releases/download/0.1.0/x86_64-unknown-linux-gnu'
+    t = "x86_64-unknown-linux-gnu"
+    url "https://github.com/ispec-inc/starry/releases/download/0.1.0/starry-#{t}"
 
     def install
-      file = Dir.glob("#{prefix}/bin/starry*").first
-      FileUtils.ln file, "#{prefix}/bin/starry"
-      bin.install_symlink bin/"starry"
+      bin.install "starry-#{t}" => "starry"
     end
   end
 end
