@@ -13,11 +13,15 @@ class Starry < Formula
       'arm64'   => 'aarch64',
     }.fetch(`uname -m`.strip)
 
+    puts "karnel: #{karnel} arch: #{arch}"
     case karnel
     when "linux"
       target = "x86_64-unknown-linux-gnu"
     when "darwin"
       target = "#{arch}-apple-darwin"
+    else
+      puts "ERROR: unsupported arch"
+      exit
     end
 
     system 'curl',
