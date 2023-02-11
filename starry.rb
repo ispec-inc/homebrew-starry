@@ -1,37 +1,29 @@
 class Starry < Formula
   desc 'Initialize ispec packages'
   homepage 'https://github.com/ispec-inc/starry'
-  url 'https://github.com/ispec-inc/starry.git'
-  head 'https://github.com/ispec-inc/starry.git'
-  version "0.1.0"
+  version '0.1.0'
 
-  def install
-    karnel = `uname -s`.strip.downcase
-    arch = {
-      'x86_64'  => 'x86_64',
-      'aarch64' => 'aarch64',
-      'arm64'   => 'aarch64',
-    }.fetch(`uname -m`.strip)
-
-    puts "karnel: #{karnel} arch: #{arch}"
-    case karnel
-    when "linux"
-      target = "x86_64-unknown-linux-gnu"
-    when "darwin"
-      target = "#{arch}-apple-darwin"
-    else
-      puts "ERROR: unsupported arch"
-      exit
+  on_macos do
+    if Hardware::CPU.intel?
+      url 'https://github.com/ispec-inc/starry/releases/download/0.1.0/starry-x86_64-apple-darwin'
     end
 
-    system 'curl',
-      "-o",
-      "starry",
-      "-sL",
-      "https://github.com/ispec-inc/starry/releases/download/0.1.0/starry-#{target}"
+    if Hardware::CPU.arm?
+      url 'https://github.com/ispec-inc/starry/releases/download/0.1.0/starry-aarch64-apple-darwin'
+    end
 
-    system 'chmod', "+x", 'starry'
+    def install
+      system "mv", "starry*", "starry"
+      bin.install "starry"
+    end
+  end
 
-    bin.install 'starry'
+  on_linux do
+    url 'https://github.com/ispec-inc/starry/releases/download/0.1.0/x86_64-unknown-linux-gnu'
+
+    def install
+      system "mv", "starry*", "starry"
+      bin.install "starry"
+    end
   end
 end
