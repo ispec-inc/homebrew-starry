@@ -1,7 +1,7 @@
 class Starry < Formula
   desc 'Initialize ispec packages'
   homepage 'https://github.com/ispec-inc/starry'
-  url 'https://github.com/ispec-inc/starry.git', tag: 'v0.1.0'
+  url 'https://github.com/ispec-inc/starry.git'
   head 'https://github.com/ispec-inc/starry.git'
 
   def install
