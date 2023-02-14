@@ -1,1 +1,1 @@
-# homebrew-starry
+# homebrew-tap
